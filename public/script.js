@@ -47,27 +47,26 @@ fetch("/messages")
     xhr.send(JSON.stringify({ message: newMessage }));
   });
 
-  (function() {
-    var urlParams = new URLSearchParams(window.location.search);
-    var myParam = urlParams.get("scan");   
-    
-    appendNewMessage("<span>local:</span> init socket");
-    var socket = new WebSocket("wss://" + document.location.hostname + ":8081");
-    socket.onopen = function(evt) {
-      messagesForm.classList.remove("disabled");
-      appendNewMessage("<span>local:</span> open socket");
-      if (myParam) {
-        appendNewMessage("<span>local:</span> send: <b>" + myParam);
-        socket.send(myParam);
-      }
-      else {
-      }
-    };
-    socket.onclose = function(evt) {
-      messagesForm.classList.add("disabled");
-      appendNewMessage("<span>local:</span> close socket");
-    };
-    socket.onmessage = function(evt) {
-      appendNewMessage("<span>server:</span> " + evt.data);
-    }
-  })();
+// check out websocket.js for what this is
+appendNewMessage("<span>local:</span> init socket");
+let socket = new FriendlyWebSocket();
+socket.on("open", data => {
+  messagesForm.classList.remove("disabled");
+  appendNewMessage("<span>local:</span> open socket");
+
+  var urlParams = new URLSearchParams(window.location.search);
+  var myParam = urlParams.get("message");   
+  if (myParam) {
+    appendNewMessage("<span>local:</span> send: <b>" + myParam);
+    socket.send(myParam);
+  }
+  else {
+  }
+});
+socket.on("close", data => {
+  messagesForm.classList.add("disabled");
+  appendNewMessage("<span>local:</span> close socket");
+});
+socket.on("message", data => {
+  appendNewMessage("<span>server:</span> " + data);
+});

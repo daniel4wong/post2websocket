@@ -2,7 +2,6 @@
 
 A server that serves a webpage, its resources, and some data
 
-
 ## Your Project
 
 On the front-end,
@@ -21,6 +20,9 @@ On the back-end,
 
 Click `Show` in the header to see your app live. Updates to your code will instantly deploy.
 
+## Reference Project
+
+- [starter-ws](https://glitch.com/edit/#!/starter-ws?path=server.js:1:0)
 
 ## Made by [Glitch](https://glitch.com/)
 
