@@ -52,7 +52,7 @@ fetch("/messages")
     var myParam = urlParams.get("scan");   
     
     appendNewMessage("<span>local:</span> init socket");
-    var socket = new WebSocket("ws://localhost:8080");
+    var socket = new WebSocket("wss://" + document.location.hostname + ":8081");
     socket.onopen = function(evt) {
       messagesForm.classList.remove("disabled");
       appendNewMessage("<span>local:</span> open socket");

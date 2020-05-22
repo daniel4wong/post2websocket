@@ -7,7 +7,7 @@ const { port } = require('./config');
 const express = require("express");
 const WebSocket = require('ws');
 const app = express();
-const wss = new WebSocket.Server({ port: 8080 });
+const wss = new WebSocket.Server({ port: 8081 });
 
 // our default array of messages
 const messages = [
